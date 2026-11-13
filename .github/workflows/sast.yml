@@ -1,0 +1,31 @@
+name: SAST Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    pull_request:
+      branches:
+        -main
+        
+jobs:
+  sast_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run fictional SAST scan
+        run: |
+          if grep -q -r "VULNERABLE_CODE" .; then
+            echo "A critical vulnerability is found."
+            exit 1
+          else
+            echo "SAST scan passed. No vulnerabilities found."
+            exit 0
+          fi
+      - name: Build code
+        run: |
+          echo "Building code..."
+          exit 0
