@@ -18,7 +18,7 @@ jobs:
 
       - name: Run fictional SAST scan
         run: |
-          if grep -q -r "VULNERABLE_CODE" .; then
+          if grep -q -r --exclude-dir:".github" "VULNERABLE_CODE" .; then
             echo "A critical vulnerability is found."
             exit 1
           else
